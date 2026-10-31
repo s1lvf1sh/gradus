@@ -1,0 +1,12 @@
+{
+  "name": "gradus",
+  "version": "1.0.0",
+  "description": "A composer of strict (Fuxian) counterpoint that explains every note, engraves the score and sings it.",
+  "type": "module",
+  "scripts": {
+    "start": "node serve.mjs",
+    "test": "node test/gradus.test.mjs",
+    "test:browser": "node test/browser.test.mjs"
+  },
+  "license": "MIT"
+}

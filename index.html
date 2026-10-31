@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gradus: a counterpoint workshop</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="title">
+      <h1>Gradus</h1>
+      <p class="tagline">A composer of strict counterpoint that can tell you why it wrote every note.</p>
+    </div>
+    <nav class="controls" aria-label="Composition">
+      <label>Mode
+        <select id="mode">
+          <option value="dorian">Dorian (D)</option>
+          <option value="phrygian">Phrygian (E)</option>
+          <option value="mixolydian">Mixolydian (G)</option>
+          <option value="aeolian">Aeolian (A)</option>
+          <option value="ionian">Ionian (C)</option>
+        </select>
+      </label>
+      <div class="group" role="radiogroup" aria-label="Species" id="species">
+        <span class="group-label">Species</span>
+        <button data-species="1" title="Note against note">1</button>
+        <button data-species="2" title="Two notes against one">2</button>
+        <button data-species="3" title="Four notes against one">3</button>
+        <button data-species="4" title="Syncopation and suspensions">4</button>
+      </div>
+      <div class="group" role="radiogroup" aria-label="Counterpoint position" id="position">
+        <button data-above="1">Above</button>
+        <button data-above="0">Below</button>
+      </div>
+      <button id="new-cantus" class="primary">New cantus</button>
+      <button id="recompose" title="Keep the cantus, write a different counterpoint">Recompose</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="score-panel" aria-label="Score">
+      <div class="score-head">
+        <div id="piece-title" class="piece-title"></div>
+        <div class="transport">
+          <button id="play" class="primary" aria-label="Play">▶ Play</button>
+          <label class="tempo">Tempo <input id="tempo" type="range" min="60" max="200" step="10" value="120" /> <span id="tempo-value">120</span></label>
+          <label>Tuning
+            <select id="tuning">
+              <option value="meantone">Quarter-comma meantone</option>
+              <option value="equal">Equal temperament</option>
+            </select>
+          </label>
+          <label class="check"><input id="figures" type="checkbox" checked /> Intervals</label>
+          <button id="download" title="Download the performance as a WAV file">Download WAV</button>
+        </div>
+      </div>
+      <div id="score" class="score-wrap" tabindex="0" aria-label="Score. Select a counterpoint note, then use the up and down arrow keys to move it."></div>
+      <div class="edit-bar">
+        <span id="hint" class="hint">Click any note of the counterpoint to ask why it is there. Then use <kbd>↑</kbd> <kbd>↓</kbd> to change it, and <kbd>←</kbd> <kbd>→</kbd> to move between notes.</span>
+        <span class="edit-actions">
+          <button id="finish" disabled title="Keep the notes you changed and let the composer write the rest">Finish it for me</button>
+          <button id="revert" disabled>Undo my changes</button>
+        </span>
+      </div>
+    </section>
+
+    <section class="panels">
+      <article class="panel" aria-labelledby="remarks-h">
+        <h2 id="remarks-h">The master's remarks</h2>
+        <div id="remarks"></div>
+      </article>
+      <article class="panel" aria-labelledby="why-h">
+        <h2 id="why-h">Why this note?</h2>
+        <div id="why"><p class="muted">Select a note of the counterpoint. Every pitch the composer could have written there is listed, with what the rules say about it.</p></div>
+      </article>
+    </section>
+
+    <details class="about">
+      <summary>How it works</summary>
+      <div class="about-body">
+        <p>In 1725 Johann Joseph Fux published <em>Gradus ad Parnassum</em> ("steps to Parnassus"), a dialogue in which a master teaches a pupil to write counterpoint in five graded <em>species</em>. It taught Haydn, Mozart and Beethoven, and it is still taught today. Gradus composes the first four species.</p>
+        <ol>
+          <li><strong>A cantus firmus</strong> is written first: a plain melody in whole notes that starts and ends on the final of the mode, moves mostly by step, has one high point and recovers from its leaps.</li>
+          <li><strong>The counterpoint</strong> is found by a beam search. The composer writes left to right. At each step it extends the best few dozen partial lines by every pitch the rules allow, scores them on taste (contrary motion, thirds and sixths, few leaps, and suspensions in the fourth species), and keeps the best. If that greedy search walks into a dead end, an exhaustive search with memory takes over. It finds a solution or proves that none exists.</li>
+          <li><strong>The rules</strong> live in one module, and the composer and the critic share it. So when you change a note, you get exactly the judgement the composer applied to itself. <em>Why this note?</em> tries every alternative pitch in place and reports what each would break.</li>
+          <li><strong>The singing</strong> is synthesised in the page: harmonics shaped by vowel formants ("ah" above, "oh" below), vibrato that blooms after each attack, and a stone-room reverb. It is tuned in quarter-comma meantone, the tuning of a sixteenth-century organ, where major thirds are pure.</li>
+        </ol>
+        <p class="muted">The master's remarks paraphrase the traditional rules. They are not quotations from Fux.</p>
+      </div>
+    </details>
+  </main>
+
+  <footer>Gradus · every piece can be reproduced from the link in the address bar</footer>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
