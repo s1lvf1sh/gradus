@@ -4,6 +4,8 @@
 
 Gradus writes two-voice counterpoint by the rules that Johann Joseph Fux set out in *Gradus ad Parnassum* (1725), the book that taught Haydn, Mozart and Beethoven. It draws the score, sings it with a synthesised choir, and explains itself. Click any note to see every pitch that could have gone there and the rule each alternative would break. Change notes yourself and the same rules judge your version. If you get stuck, it will finish the line around the notes you wrote, or prove that no correct finish exists.
 
+**[Try it live](https://s1lvf1sh.github.io/gradus/)**
+
 Runs in the browser. No dependencies, no build step and no samples: the notation is drawn as SVG paths, and the voices are synthesised sample by sample.
 
 ```
